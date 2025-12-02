@@ -1,4 +1,12 @@
 const mongoose = require("mongoose");
+const cartSchema = new mongoose.Schema({
+    title: String,
+    productId: String,
+    image: String,
+    size: String,
+    quantity: Number
+});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -28,6 +36,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password is required"],
   },
   role: String,
+   cart: [cartSchema]
 });
 
 const User = mongoose.model("users", userSchema);

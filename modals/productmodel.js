@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+
 const ProductSchema=new mongoose.Schema({
      title:{
           type:String,
@@ -20,7 +21,8 @@ const ProductSchema=new mongoose.Schema({
     images:{
         type:[String],
         required:[true,"Product must have at least one image!"]
-    }
+    },
+   
 });
 
 

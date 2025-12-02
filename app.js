@@ -3,10 +3,16 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const authRouter = require("./routes/authRouter");
 const productRouter = require("./routes/productRouter");
-
+const cartRouter = require("./routes/cartRouter");
+const cors = require("cors");
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+
 
 mongoose
   .connect(
@@ -16,13 +22,14 @@ mongoose
   .catch((err) => console.log("Something went wrong with db connection!", err));
 
 app.use("/user", authRouter);
-app.use("/product", productRouter)
+app.use("/product", productRouter);
+app.use("/cart", cartRouter);
 
-const {v2} = require("cloudinary");
+const { v2 } = require("cloudinary");
 const multer = require("multer");
 const cloudinary = v2;
 
-const uploader = multer({storage: multer.memoryStorage()});
+const uploader = multer({ storage: multer.memoryStorage() });
 cloudinary.config({
   cloud_name: "dtlm8rddj",
   api_key: "727516911875412",
